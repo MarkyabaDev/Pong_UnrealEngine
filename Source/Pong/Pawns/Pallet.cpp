@@ -4,6 +4,7 @@
 #include "Pallet.h"
 
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APallet::APallet()
@@ -43,6 +44,11 @@ void APallet::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void APallet::Move(float Value)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Move: %f"), Value)
+
+	const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
+	const FVector NewLocation(0,0, Value * DeltaTime * MovementSpeed);
+
+	AddActorLocalOffset(NewLocation, true);
 }
 
 

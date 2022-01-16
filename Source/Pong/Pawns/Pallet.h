@@ -12,6 +12,10 @@ class PONG_API APallet : public APawn
 	GENERATED_BODY()
 
 private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+	float MovementSpeed = 200.f;
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UBoxComponent* BoxComponent;
 
