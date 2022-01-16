@@ -43,8 +43,6 @@ void APallet::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void APallet::Move(float Value)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Move: %f"), Value)
-
 	const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
 	const FVector NewLocation(0,0, Value * DeltaTime * MovementSpeed);
 
