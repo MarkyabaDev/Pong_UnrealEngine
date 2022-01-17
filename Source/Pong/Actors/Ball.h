@@ -37,6 +37,8 @@ private:
 
 	float CurrentZOffset = 0;
 
+	FVector ResetPosition;
+
 	void StartGameAfterDelay();
 
 	void Move();

@@ -27,6 +27,7 @@ void ABall::BeginPlay()
 {
 	Super::BeginPlay();
 
+	ResetPosition = GetActorLocation();
 	BallMesh->OnComponentBeginOverlap.AddDynamic(this, &ABall::ABall::OnOverlapOutTrigger);
 
 	BeginRound();
@@ -80,6 +81,10 @@ void ABall::IncreaseAndReverseSpeed()
 
 void ABall::BeginRound()
 {
+	CurrentZOffset = 0;
+	CurrentSpeed = 0;
+	SetActorLocation(ResetPosition);
+
 	FTimerHandle StartDelayHandle;
 	GetWorldTimerManager().SetTimer(StartDelayHandle, this, &ABall::StartGameAfterDelay, 3, false);
 }
@@ -90,6 +95,8 @@ void ABall::OnOverlapOutTrigger(UPrimitiveComponent* OverlappedComponent, AActor
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Name of Other Actor: %s"), *OtherActor->GetName());
 	}
+
+	BeginRound();
 }
 
 
