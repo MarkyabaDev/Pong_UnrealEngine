@@ -27,9 +27,9 @@ void ABall::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FTimerHandle StartDelayHandle;
+	BallMesh->OnComponentBeginOverlap.AddDynamic(this, &ABall::ABall::OnOverlapOutTrigger);
 
-	GetWorldTimerManager().SetTimer(StartDelayHandle, this, &ABall::StartGameAfterDelay, 3, false);
+	BeginRound();
 }
 
 // Called every frame
@@ -42,7 +42,6 @@ void ABall::Tick(float DeltaTime)
 void ABall::StartGameAfterDelay()
 {
 	CurrentSpeed = InitialSpeed;
-	UE_LOG(LogTemp, Warning, TEXT("Start Game"))
 }
 
 
@@ -79,5 +78,18 @@ void ABall::IncreaseAndReverseSpeed()
 	CurrentSpeed *= (SpeedIncreaseAmountInPercent * 0.01f + 1) * -1;
 }
 
+void ABall::BeginRound()
+{
+	FTimerHandle StartDelayHandle;
+	GetWorldTimerManager().SetTimer(StartDelayHandle, this, &ABall::StartGameAfterDelay, 3, false);
+}
+
+void ABall::OnOverlapOutTrigger(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Name of Other Actor: %s"), *OtherActor->GetName());
+	}
+}
 
 
