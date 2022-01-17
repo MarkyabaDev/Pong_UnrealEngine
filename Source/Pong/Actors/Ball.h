@@ -27,9 +27,15 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MaxSpeed = 1000.f;
 
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float MinZOffset = -30.f;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float MaxZOffset = 30.f;
+
 	float CurrentSpeed = 0;
 
-	float CurrentZOffset = 0.6f;
+	float CurrentZOffset = 0;
 
 	void StartGameAfterDelay();
 

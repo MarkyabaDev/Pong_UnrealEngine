@@ -49,7 +49,7 @@ void ABall::StartGameAfterDelay()
 void ABall::Move()
 {
 	float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
-	FVector NewLocation(0, CurrentSpeed * DeltaTime, CurrentZOffset);
+	FVector NewLocation(0, CurrentSpeed * DeltaTime, CurrentZOffset * DeltaTime);
 
 
 	FHitResult SweepHitResult;
@@ -70,6 +70,7 @@ void ABall::Move()
 
 void ABall::IncreaseAndReverseSpeed()
 {
+	CurrentZOffset = FMath::FRandRange(MinZOffset, MaxZOffset);
 	if (CurrentSpeed >= MaxSpeed || CurrentSpeed <= -MaxSpeed)
 	{
 		CurrentSpeed *= -1;
